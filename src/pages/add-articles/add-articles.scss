@@ -1,0 +1,81 @@
+page-add-articles {
+  .selectable {
+    -webkit-user-select: auto !important;
+    -khtml-user-select: auto !important;
+    -moz-user-select: auto !important;
+    -ms-user-select: auto !important;
+    -o-user-select: auto !important;
+    user-select: auto !important;
+  }
+
+  .item-md {
+    padding: 0;
+  }ion-item  {
+     padding: 0 !important;
+   }
+  .containerBox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+  }
+  .containerBox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    border: 2px solid red;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border: 1px solid #afcfd6;
+  }
+
+  .containerBox:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+
+  .containerBox input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  .containerBox input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  .containerBox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  .quillBox{
+    margin-bottom: 15px !important;
+  }
+
+}

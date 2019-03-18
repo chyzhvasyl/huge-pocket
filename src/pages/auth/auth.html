@@ -1,0 +1,50 @@
+<ion-header transparent>
+  <button *ngIf="!return"
+          (click)="back()"
+          ion-button
+          icon-left>
+    <ion-icon name="arrow-back"></ion-icon>
+  </button>
+  <button *ngIf="return"
+          ion-button
+          icon-left
+          (click)="backHome()">
+    <ion-icon name="arrow-back"></ion-icon>
+  </button>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="preloader" class="spinner">
+    <div class="spin">
+      <ion-spinner name="ios-small"></ion-spinner>
+    </div>
+
+  </div>
+  <form  *ngIf="!preloader" [formGroup]="form" (ngSubmit)="onAuthorization()">
+    <ion-list >
+      <div class="position_fa-eye">
+        <i class="fas fa-user"></i>
+      </div>
+      <input id="login" type="text" formControlName="username" [(ngModel)]="loginUser" placeholder="Логин">
+    </ion-list>
+    <ion-list >
+      <div class="position_fa-eye">
+        <i  (click)="toggle()"   [class]="eyeSlash" aria-hidden="true"></i>
+      </div>
+      <input id="password" [type]="inputType" formControlName="password" placeholder="Пароль">
+    </ion-list>
+    <div class="failed" *ngIf="fail">
+      <p class="unauthorized">Вы ввели не верный пароль или имя</p>
+    </div>
+    <ion-list>
+      <button [disabled] = "form.invalid" type="submit" ion-button color="secondary" outline>
+        <div class="position_icon_sign_in">
+          <i class="fas fa-sign-in-alt"></i>
+        </div>
+        <p class="padding-left">
+          Вход
+        </p>
+      </button>
+    </ion-list>
+  </form>
+</ion-content>

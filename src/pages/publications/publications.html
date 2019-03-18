@@ -1,0 +1,75 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title></ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content has-bouncing="true" overflow-scroll="false" class="action-sheets-basic-page">
+    <div
+            *ngIf="preloader"
+            class="spinner"
+    >
+        <div class="spin">
+            <ion-spinner name="ios-small"></ion-spinner>
+        </div>
+    </div>
+    <ion-list *ngIf="!preloader">
+        <ion-item>
+            <ion-grid *ngFor="let a of articles">
+                <ion-row
+                        class="list__style"
+                        justify-content-between
+                        align-items-center
+                        (click)="doWithArticle(a)"
+                >
+                    <ion-col
+                            col-7 class="text__left"
+
+                    >
+                        <h6 class="hidden__text">{{ a.title }}</h6>
+                        <p style="font-size: 1rem" class="color">{{ a.timeOfCreation | date: 'short' }}</p>
+                    </ion-col>
+                    <ion-col col-4>
+                        <span
+                                *ngIf="a.status === 'published'"
+                                class="label success"
+                        >Опубликована</span>
+                        <span
+                                *ngIf="a.status === 'modified'"
+                                class="label info"
+                        >Утверждена</span>
+                        <span
+                                *ngIf="a.status === 'created'"
+                                class="label warning"
+                        >В ожидании</span>
+                        <span
+                                *ngIf="a.status === 'not approved by editor'"
+                                class="label not__approve"
+                        >Не одобрена</span>
+                        <span
+                                *ngIf="a.status === 'not approved by publisher'"
+                                class="label not__approve"
+                        >Не одобрена</span>
+                    </ion-col>
+                    <ion-col col-1 style="font-size: 21px">
+                        <ion-icon ios="ios-more" md="md-more"></ion-icon>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <div
+                    *ngIf="endArticles"
+                    class="endArticles"
+            >
+                Статей больше нет
+            </div>
+        </ion-item>
+
+    </ion-list>
+    <ion-infinite-scroll class="margin_bot"
+            (ionInfinite)="doInfinite($event)"
+            *ngIf="!endArticles">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Загрузка ..."
+        ></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

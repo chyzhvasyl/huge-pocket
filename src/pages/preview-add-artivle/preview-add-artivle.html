@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Предпросмотр</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">Закрыть</button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-row>
+    <ion-col col-12>
+
+      <img
+              *ngIf="preview && preview.img"
+              src="{{preview.img}}"
+              style="width:100%"
+      >
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12>
+      <h3 style="padding: 15px 0 ">{{ preview.title }}</h3>
+      <div  [innerHTML]="preview.body"></div>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

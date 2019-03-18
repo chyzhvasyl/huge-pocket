@@ -1,0 +1,70 @@
+page-publications {
+  ion-col {
+    overflow: hidden;
+    color: #000000;
+
+  }
+  .item-md, .item-md.item-block .item-inner {
+    padding: 0;
+  }
+
+  .text__left {
+    text-align: left;
+    overflow: hidden;
+  }
+
+  .label {
+    font-size: 12px;
+    color: white;
+    margin: 0;
+    text-align: center;
+  }
+
+  .success {background-color: #4CAF50; padding: 2px} /* Green */
+  .info {background-color: #2196F3; padding: 2px} /* Blue */
+  .warning {background-color: #ff9800; padding: 2px} /* Orange */
+  .not__approve {background-color: #b40202; padding: 2px} /* Orange */
+
+  .ion-md-share {
+    color: #ED4248;
+  }
+  .ion-md-arrow-dropright-circle {
+    color: #508AE4;
+  }
+  .ion-md-heart-outline {
+    color: #31D55F;
+  }
+  .action-sheet-cancel ion-icon,
+  .action-sheet-destructive ion-icon {
+    color: #757575;
+  }
+
+  .alertDanger{
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  .list__style {
+    background-color: white !important;
+    padding: 0 !important;
+    margin-top: 3px;
+  }
+
+  ion-content, ion-grid, .input-wrapper {
+    background-color: #cdcdcd !important;
+  }
+
+  ion-grid {
+    padding: 0 5px !important;
+  }
+
+  .massage {
+    background-color: yellow;
+    color: #2d2d2d;
+  }
+  .margin_bot{
+    margin-bottom: 120%;
+  }
+}
+
+

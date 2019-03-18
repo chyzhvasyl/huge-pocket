@@ -1,0 +1,294 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>
+            <div
+                    *ngIf="!preloader"
+                    (click)="backForArticles('onlyBack')"
+            >
+                <ion-icon
+                        ios="ios-arrow-back"
+                        md="md-arrow-back"
+                > </ion-icon>  Назад
+            </div>
+
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div
+            *ngIf="preloader"
+            class="spinner"
+    >
+        <div class="spin">
+            <ion-spinner name="ios-small"></ion-spinner>
+        </div>
+    </div>
+    <div *ngIf="article && params && !preloader">
+        <form
+
+                [formGroup]="form"
+                (ngSubmit)="saveChangedArticle()"
+        >
+            <ion-item class="file-upload">
+                <ion-input
+                        type="file"
+                        id="avatar"
+                        (change)="fileChangeListener($event)"
+                        name="video"
+                        #fileInput
+                        placeholder="Загрузите картинку / видео"
+                ></ion-input>
+                <ion-label
+                        for="avatar"
+                        class="custom-file-label padding__null"
+                >
+                    Изменить картинку/видео
+                </ion-label>
+            </ion-item>
+            <ion-row
+                    *ngIf="article && article.imgUrl && !video"
+                    style="padding-top: 10px"
+            >
+                <ion-col col-12>
+                    <p
+                            *ngIf="bigImg && article.imgUrl"
+                            style="text-align: center; color: red; font-size: 11px; margin-bottom: 10px; "
+                    >
+                        Старая картинка
+                    </p>
+                    <div
+                            class="one-article-edit-image"
+                            #imageforArticlePreloader
+                    ></div>
+                    <img
+                            class="hide"
+                            #imgforArticle
+                            (load)="imageLoaded(imgforArticle, imageforArticlePreloader)"
+                            *ngIf="article && article.imgUrl"
+                            [src]="article.imgUrl + '?a=' + delateCacheForImage"
+                            style="width:100%"
+                    >
+                </ion-col>
+
+                <ion-col col-12 *ngIf="bigImg">
+                    <div
+                            *ngIf="bigImg && !video"
+                    >
+                        <img-cropper
+                                #cropper
+                                [image]="data"
+                                [settings]="cropperSettings"
+                        ></img-cropper>
+                        <br>
+                        <span class="result rounded" *ngIf="data.image" >
+                        <img
+                                (click)="resampleFn(data.image)"
+                                style="width: 256px; height: 144px"
+                                [src]="data.image"
+                                [width]="cropperSettings.croppedWidth"
+                                [height]="cropperSettings.croppedHeight"
+                        />
+                    </span>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row
+                    *ngIf="article && article.videoMP4Url && !bigImg"
+                    class="col-sm-12"
+            >
+                <ion-col col-12>
+                    <!--<p-->
+                    <!--*ngIf="video"-->
+                    <!--style="text-align: center; color: red; font-size: 11px; margin-bottom: 10px; ">Старое видео</p>-->
+                    <video
+                            controls
+                            style="padding: 0 !important; width: 100%;"
+                    >
+                        <source src="{{ article.videoMP4Url }}">
+                        <source src="{{ article.videoOgvUrl }}">
+                        <source src="{{ article.videoWebmUrl }}">
+                    </video>
+                </ion-col>
+            </ion-row>
+            <ion-item class="padding_null">
+                <ion-label color="primary" stacked [ngClass]="{'invalid-feedback': form.get('header').invalid && form.get('header').touched}">Заголовок</ion-label>
+                <ion-input
+                        type="text"
+                        placeholder="Введите заголовок"
+                        formControlName="header"
+                        [(ngModel)]="article.title"
+                ></ion-input>
+
+            </ion-item>
+            <span
+                    *ngIf="form.get('header').invalid && form.get('header').touched"
+                    class="invalid-feedback"
+            >
+      <span *ngIf="form.get('header').errors['required']"> Введите заголовок статьи </span>
+      <span *ngIf="form.get('header').errors['lengthTitleErr']">Заголовок не должен привышать {{ lengthTitle }} символов</span>
+    </span>
+            <ion-item >
+                <ion-label color="primary" stacked>Введите текст превъю</ion-label>
+                <ion-input
+                        [(ngModel)]="article.shortBody"
+                        type="text"
+                        placeholder="Введите текст"
+                        formControlName="textPreview"
+                        class="form-control"
+                        [ngClass]="{'is-invalid': form.get('textPreview').invalid && form.get('textPreview').touched}"
+                ></ion-input>
+
+            </ion-item>
+            <span
+                    *ngIf="form.get('textPreview').invalid && form.get('textPreview').touched"
+                    class="invalid-feedback"
+            >
+        <span *ngIf="form.get('textPreview').errors['required']">Введите превъю </span>
+        <span *ngIf="form.get('textPreview').errors['lengthPreviewErr']">Превъю не должен привышать {{ lengthPreview }} символов</span>
+      </span>
+
+            <div  class="quillBox" [ngClass]="getQuillErrorClass()">
+                <p class="label__text">Текст новости</p>
+                <quill-editor
+                        formControlName="body"
+                        [(ngModel)]="article.body"
+
+                        placeholder="Введите текст новости"
+
+                >
+                    <div  quill-editor-toolbar>
+                            <span class="ql-formats">
+                                <select class="ql-font">
+                                    <option selected>Roboto</option>
+                                    <option value="helvetica">Helvetica</option>
+                                    <option value="arial">Arial</option>
+                                </select>
+                                <select class="ql-size"></select>
+                            </span>
+                        <span class="ql-formats">
+                                    <button class="ql-bold"></button>
+                                    <button class="ql-italic"></button>
+                                    <button class="ql-underline"></button>
+                                    <button class="ql-strike"></button>
+                                    </span>
+                        <span class="ql-formats">
+                                    <select class="ql-color"></select>
+                                    <select class="ql-background"></select>
+                                    </span>
+                        <span class="ql-formats">
+                                    <button class="ql-blockquote"></button>
+                                    <button class="ql-code-block"></button>
+                                    <button class="ql-link"></button>
+                                    </span>
+                        <span class="ql-formats">
+                                    <button class="ql-header" value="1"></button>
+                                    <button class="ql-header" value="2"></button>
+                                    </span>
+                        <span class="ql-formats">
+                                    <button class="ql-list" value="ordered"></button>
+                                    <button class="ql-list" value="bullet"></button>
+                                    <button class="ql-indent" value="-1"></button>
+                                    <button class="ql-indent" value="+1"></button>
+                                    </span>
+                        <span class="ql-formats">
+                                    <button class="ql-direction" value="rtl"></button>
+                                    <select class="ql-align"></select>
+                    </span>
+                        <span class="ql-formats">
+                                    <button class="ql-script" value="sub"></button>
+                                    <button class="ql-script" value="super"></button>
+                    </span>
+                        <span class="ql-formats">
+                                    <button class="ql-video"></button>
+                                    <button class="ql-image"></button>
+                    </span>
+                    </div>
+                </quill-editor>
+                <span
+                        *ngIf="quillLengthLessNeed"
+                        style="color: red; font-size: 12px"
+                >
+                    Введите статью
+                </span>
+                <span
+                        *ngIf="quillLengthLarge"
+                        style="color: red; font-size: 12px"
+                >
+                    Статья не должна привышать {{ lengthBody }} символов
+                </span>
+            </div>
+            <label class="containerBox">Приватность
+                <input  formControlName="private" [(ngModel)]="article.private" type="checkbox" id="privacy"   name="privacy">
+                <span class="checkmark"></span>
+            </label>
+            <label class="containerBox">Главная новость
+                <input  formControlName="topNews" [(ngModel)]="article.topNews" type="checkbox" id="topNews"   name="topNews">
+                <span class="checkmark"></span>
+            </label>
+            <p class="label__text">Категории</p>
+
+
+
+            <ion-list radio-group formControlName="food" [ngModel]="article.category._id">
+                <ion-item *ngFor="let category of categories">
+                    <ion-label>{{ category.name }}</ion-label>
+                    <ion-radio
+                            checked="article.category._id === category._id"
+                            type="radio"
+                            [value]="category._id"
+                            item-start
+                    ></ion-radio>
+                </ion-item>
+            </ion-list>
+            <div
+                    *ngIf="canShowAddCateg()"
+                    (click)="changeStatus()"
+            >
+                <ion-icon ios="ios-folder" md="md-folder"></ion-icon> Добавить категорию
+            </div>
+
+            <ion-row justify-content-between align-items-end color="primary" *ngIf="input">
+                <ion-col col-12>
+                    <ion-list>
+                        <ion-item>
+                            <ion-label color="primary" stacked>Название категории</ion-label>
+                            <ion-input
+                                    placeholder="Text Input"
+                                    type="text"
+                                    [(ngModel)]="newNameCategory"
+                                    [ngModelOptions]="{standalone: true}"
+                            ></ion-input>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+                <ion-col col-3 offset-7>
+                    <button
+                            ion-button
+                            color="secondary"
+                            (click)="addCategory()"
+                            type="button"
+                    >
+                        Добавить
+                    </button>
+                </ion-col>
+            </ion-row>
+            <div class="button__add">
+                <button
+                        ion-button color="secondary"
+                        type="button"
+                        (click)="backForArticles('onlyBack')"
+                >Отмена</button>
+                <button
+                        ion-button color="danger"
+                        type="submit"
+                        [disabled]="form.invalid"
+                >Сохранить</button>
+            </div>
+        </form>
+    </div>
+
+</ion-content>

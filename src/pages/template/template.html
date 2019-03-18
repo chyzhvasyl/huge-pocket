@@ -1,0 +1,180 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>template</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div
+          *ngIf="!params && !categories"
+          class="spinner"
+  >
+    <div class="spin">
+      <ion-spinner name="ios-small"></ion-spinner>
+    </div>
+  </div>
+  <div *ngIf="params && categories">
+    <div class="items">
+      <ion-item class="items__first" >
+        <ion-label color="primary" stacked>Длина превъю</ion-label>
+        <ion-input
+                type="number"
+                placeholder="Длина превъю"
+                [(ngModel)]="legPreviewOnMain"
+        ></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label color="primary" stacked>Размер шрифта превъю</ion-label>
+        <ion-input
+                type="number"
+                placeholder="Размер шрифта превъю"
+                [(ngModel)]="fontPreviewOnMain"
+        ></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="items">
+      <ion-item class="items__first">
+        <ion-label color="primary" stacked>Длина заголовка</ion-label>
+        <ion-input
+                type="number"
+                placeholder="Длина заголовка"
+                [(ngModel)]="lengthTitle"
+        ></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label color="primary" stacked>Размер шрифта заголовка</ion-label>
+        <ion-input
+                type="number"
+                placeholder="Размер шрифта заголовка"
+                [(ngModel)]="fontSizeTitle"
+        ></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="items">
+      <ion-item class="items__first">
+        <ion-label color="primary" stacked>Длина статьи</ion-label>
+        <ion-input
+                type="number"
+                placeholder="Длина статьи"
+                [(ngModel)]="lengthBody"
+        ></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label color="primary" stacked>Размер шрифта</ion-label>
+        <ion-input
+                type="number"
+                placeholder="Размер шрифта"
+                [(ngModel)]="fontSizeBody"
+        ></ion-input>
+      </ion-item>
+    </div>
+    <div class="items">
+      <ion-item style="width: 50%">
+        <ion-label color="primary" stacked>Количество дней токина</ion-label>
+        <ion-input
+                type="number"
+                placeholder="Количество дней токина"
+                [(ngModel)]="lifeTimeLocalStorege"
+        ></ion-input>
+      </ion-item>
+    </div>
+    <div class="color__picker">
+      <span style="font-size:12px; color: #498cfb;">Цвет фона:</span>
+      <span [style.background]="color"
+            [cpToggle]="true"
+            [cpDialogDisplay]="'inline'"
+            [(colorPicker)]="color"></span>
+    </div>
+    <div>
+      <div class="button__save">
+        <button
+                ion-button
+                color="secondary"
+                *ngIf="save || params && params.length !== 0"
+                (click)="changeParams('change')"
+        >Сохранить</button>
+        <button
+                ion-button
+                color="secondary"
+                *ngIf="params && params.length === 0 && !save"
+                (click)="changeParams('create')"
+        >Создать параметры</button>
+      </div>
+      <div>
+        <p class="label__text">Категории</p>
+        <ion-list radio-group>
+          <ion-item-group reorder="true" (ionItemReorder)="reorderItems($event)">
+          <ion-item *ngFor="let category of categories">
+            <ion-label>{{ category.name }}</ion-label>
+            <button
+                    (click)="deleteCategory(category)"
+                    style="background-color: #e91e63"
+                    ion-button
+                    item-end
+            >
+              <ion-icon
+                      style="font-size: 16px"
+                      ios="ios-close-circle"
+                      md="md-close-circle"
+              ></ion-icon>
+            </button>
+          </ion-item>
+          </ion-item-group>
+        </ion-list>
+      </div>
+      <div>
+        <ion-icon
+                (click)="changeStatus()"
+                style="color: #498cfb"
+                ios="ios-folder"
+                md="md-folder"
+        >   Добавить категорию</ion-icon>
+        <div *ngIf="input" class="items">
+          <ion-item>
+            <ion-input
+                    placeholder="Название категории"
+                    type="text"
+                    [(ngModel)]="newNameCategory"
+                    [ngModelOptions]="{standalone: true}"
+            ></ion-input>
+
+          </ion-item>
+          <button
+                  ion-button
+                  color="danger"
+                  (click)="addCategory()"
+                  type="button"
+          >
+            Добавить
+          </button>
+        </div>
+      </div>
+    </div>
+    <h4 align="center">
+      Формирование отчета
+    </h4>
+    <form [formGroup]="dateReportForm" (ngSubmit)="downloadReport(dateReportForm.value)">
+      <ion-item>
+        <ion-label>Начальная дата</ion-label>
+        <ion-datetime formControlName = "from"  display-format="MM/YYYY" picker-format="MMMM YYYY"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Конечная дата</ion-label>
+        <ion-datetime formControlName = "to" display-format="MM/YYYY" picker-format="MMMM YYYY"></ion-datetime>
+      </ion-item>
+      <button [disabled]="dateReportForm.invalid" type="submit" class="downloadReport">
+        Скачать отчёт
+      </button>
+    </form>
+
+
+
+
+
+  </div>
+</ion-content>

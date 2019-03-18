@@ -1,0 +1,54 @@
+<!--
+  Generated template for the MessagePubAndEditorPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>MessagePubAndEditor</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div>
+    <ion-icon
+            (click)="backForArticles()"
+            style="margin-bottom: 15px"
+            ios="ios-arrow-round-back"
+            md="md-arrow-round-back"
+    >  К статьям</ion-icon>
+  </div>
+  <div *ngIf="canShowForEditor()">
+    <div *ngFor="let comment of commentForEditor">
+      <div  class="home__item">
+        <div class="home__item__img">
+          <ion-icon name="contact"></ion-icon>
+          <p>{{ comment.user.firstName }}</p>
+          <p>{{ comment.user.lastName }}</p>
+        </div>
+        <div class="home__item__content">
+          <p>{{ comment.body }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="canShowForAuthor()">
+    <div *ngFor="let comment of commentForAuthor">
+      <div  class="home__item">
+        <div class="home__item__img">
+          <ion-icon name="contact"></ion-icon>
+          <p>{{ comment.user.firstName }}</p>
+          <p>{{ comment.user.lastName }}</p>
+        </div>
+        <div class="home__item__content">
+          <p>{{ comment.body }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

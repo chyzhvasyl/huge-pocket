@@ -1,0 +1,69 @@
+
+
+
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <ion-icon>
+          Категории
+        </ion-icon>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+
+    <ion-list no-lines>
+      <button
+              menuClose
+              ion-item
+              (click)="openAllArticles()"
+      >
+          Все статьи
+      </button>
+      <button
+              menuClose
+              ion-item
+              *ngFor="let category of categories"
+              (click)="openHomePage(category)"
+      >
+        {{category.name | firstCapitalLetter}}
+      </button>
+    </ion-list>
+  </ion-content>
+  <ion-footer class="alert-button-group" style="padding-right: 25px">
+    <button
+            (click)="openAdmin()"
+            *ngIf="canShow()"
+            class="padding-left"
+            ion-button color="danger"
+            menuClose
+    >
+      Админ
+    </button>
+    <button
+            *ngIf="canShow()"
+            (click)="logOut()"
+            class="padding-left"
+            ion-button
+            color="primary"
+            menuClose
+    >
+      Выход
+    </button>
+
+    <button *ngIf="!cookieValue"
+            (click)="signIn()"
+            class="btn btn-green btn-fill-horz"
+            ion-button
+            menuClose
+    >
+      Авторизация
+    </button>
+  </ion-footer>
+</ion-menu>
+
+<!--&lt;!&ndash; Disable swipe-to-go-back because it's poor UX to combine STGB with side menus &ndash;&gt;-->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+

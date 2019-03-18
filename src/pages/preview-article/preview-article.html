@@ -1,0 +1,80 @@
+<!--
+  Generated template for the PreviewArticlePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      <div
+              (click)="backForArticles()"
+      >
+        <ion-icon
+                ios="ios-arrow-back"
+                md="md-arrow-back"
+        > </ion-icon>  Назад
+      </div>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding >
+  <div
+          *ngIf="preloader"
+          class="spinner"
+  >
+    <div class="spin">
+      <ion-spinner name="ios-small"></ion-spinner>
+    </div>
+  </div>
+  <div *ngIf="article">
+    <div>
+      <ion-icon
+              (click)="backForArticles()"
+              style="margin: 10px 16px;"
+              ios="ios-arrow-round-back" md="md-arrow-round-back"
+      >  К статьям</ion-icon>
+    </div>
+    <div
+            class="one-article-image"
+            #imageforArticlePreloader
+    ></div>
+    <img
+            class="hide"
+            #imgforArticle
+            (load)="imageLoaded(imgforArticle, imageforArticlePreloader)"
+            *ngIf="article && article.imgUrl"
+            [src]="article.imgUrl + '?a=' + delateCacheForImage"
+            style="width:100%"
+    >
+    <video
+            *ngIf="article && article.videoMP4Url && article.videoOgvUrl && article.videoWebmUrl"
+            controls
+            class="col-sm-12"
+            style="padding: 0 !important; width: 100%;"
+    >
+      <source src="{{ article.videoMP4Url }}">
+      <source src="{{ article.videoOgvUrl }}">
+      <source src="{{ article.videoWebmUrl }}">
+    </video>
+    <div
+            *ngIf="article && article.title && article.body"
+            style="padding: 16px"
+    >
+      <h3>{{ article.title}}</h3>
+      <div [innerHTML]="article.body | setHtmlForAdmin"></div>
+    </div>
+    <p
+            class="color"
+            style="padding: 0 16px 16px 16px"
+    >
+      {{article.user.firstName}} {{article.user.lastName}}
+    </p>
+  </div>
+
+
+</ion-content>

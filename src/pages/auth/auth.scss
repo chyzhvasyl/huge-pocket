@@ -1,0 +1,199 @@
+page-auth {
+  $font-size: 20px;
+  ion-content {
+    color: black !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../assets/imgs/registration_clear.png") !important;
+    padding: 0
+  }
+  ion-header  button
+  {
+    background: transparent!important;
+  }
+  .toolbar.toolbar-md {
+    opacity: 0 !important;
+    color: black !important;
+  }
+
+
+  .item-md {
+    margin-top: 20px;
+    background-color: transparent;
+  }
+
+  .header-md::after {
+    background-image: none;
+  }
+
+  .scroll-content {
+    overflow-y: hidden;
+  }
+
+  .text-input::-moz-placeholder {
+    color: white;
+  }
+
+  .text-input:-ms-input-placeholder {
+    color: white;
+  }
+
+  .text-input::-webkit-input-placeholder, .text-input-md {
+    text-indent: 0;
+    color: white;
+  }
+
+  button[disabled], [ion-button][disabled] {
+    opacity: 1;
+  }
+  .button-outline-md-secondary {
+    border-color: #f4f4f4 !important;
+    background-color: #00000063;
+  }
+  .button_back {
+    position: absolute;
+    left: 0;
+    height: auto !important;
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid #000000;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 12px;
+    padding: 5px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    vertical-align:middle
+  }
+
+  .button_back span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .button_back span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .button_back:hover span {
+    padding-right: 25px;
+  }
+
+  .button_back:hover span:after {
+    opacity: 1;
+    right: 0;.button_back {
+    position: absolute;
+    left: 0;
+    height: auto !important;
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid #000000;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 12px;
+    padding: 5px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    vertical-align:middle
+  }
+
+    .button_back span {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      transition: 0.5s;
+    }
+
+    .button_back span:after {
+      content: '\00bb';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: -20px;
+      transition: 0.5s;
+    }
+
+    .button_back:hover span {
+      padding-right: 25px;
+    }
+
+    .button_back:hover span:after {
+      opacity: 1;
+      right: 0;
+    }
+  }
+  ion-list {
+    text-align: center;
+  }
+  ion-list input{
+    color: whitesmoke;
+    padding: 3px 3px 3px 40px;
+    font-size: $font-size;
+    height: 30px;
+    margin-bottom: 20px;
+    width: 80%;
+    background: none;
+    border: none;
+    border-bottom: 4px solid whitesmoke;
+  }
+  ion-list input::placeholder{
+    color: whitesmoke;
+    font-size: $font-size;
+  }
+  .position_fa-eye{
+    color: whitesmoke !important;
+    display: block !important;
+    position: absolute !important;
+    left: 12%;
+  }
+  .position_icon_sign_in{
+    color: whitesmoke !important;
+    display: block !important;
+    position: absolute !important;
+    left: 0;
+  }
+  ion-list button{
+    font-weight: bold;
+    margin-top: 5%!important;
+    border-radius: 10px !important;
+    border: 2px solid whitesmoke !important;
+    color: whitesmoke !important;
+    background: none !important;
+
+  }
+  ion-list button:disabled{
+    border-color: gray !important;
+    color: gray !important;
+  }
+  div ion-list i{
+    font-size: $font-size;
+  }
+  button p {
+    padding-left: 5px;
+  }
+  form{
+    margin-top: 65%;
+  }
+  .unauthorized{
+    color: orangered;
+    font-size: $font-size;
+    font-weight: bold;
+    padding-left: 20px;
+  }
+  ion-header button{
+    font-weight: bold !important;
+    font-size: 25px !important;
+  }
+}

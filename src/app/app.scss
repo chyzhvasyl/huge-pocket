@@ -1,0 +1,338 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/Roboto/RobotoRegular.eot");
+  src: url("../assets/fonts/Roboto/RobotoRegular.eot?#iefix")format("embedded-opentype"),
+  url("../assets/fonts/Roboto/RobotoRegular.woff") format("woff"),
+  url("../assets/fonts/Roboto/RobotoRegular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+@font-face {
+  font-family: "Arial";
+  src: url("../assets/fonts/Arial/ArialRegular.eot");
+  src: url("../assets/fonts/Arial/ArialRegular.eot?#iefix")format("embedded-opentype"),
+  url("../assets/fonts/Arial/ArialRegular.woff") format("woff"),
+  url("../assets/fonts/Arial/ArialRegular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Helvetica";
+  src: url("../assets/fonts/Helvetica/HelveticaRegular.eot");
+  src: url("../assets/fonts/Helvetica/HelveticaRegular.eot?#iefix")format("embedded-opentype"),
+  url("../assets/fonts/Helvetica/HelveticaRegular.woff") format("woff"),
+  url("../assets/fonts/Helvetica/HelveticaRegular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+/* Set default font-family */
+[quill-editor-element] {
+  font-family: "Roboto", sans-serif;
+}
+
+/* Set dropdown font-families */
+[quill-editor-toolbar] .ql-font span[data-label="Roboto"]::before {
+  font-family: "Roboto", sans-serif;
+}
+[quill-editor-toolbar] .ql-font span[data-label="Helvetica"]::before {
+  font-family: "Helvetica", sans-serif;
+}
+[quill-editor-toolbar] .ql-font span[data-label="Arial"]::before {
+  font-family: "Arial", sans-serif;
+}
+
+/* Set content font-families */
+.ql-font-helvetica {
+  font-family: 'Helvetica', sans-serif;
+}
+.ql-font-arial {
+  font-family: "Arial", sans-serif;
+}
+
+
+.alertDanger{
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.alertCancel {
+  background-color: #8c8c8c !important;
+  color: #ffffff !important;
+  margin-left: 50px;
+}
+
+.alert-button-group {
+  justify-content: space-between !important;
+}
+
+.invalid-feedback {
+  color: red;
+}
+
+.label__text {
+  color: #498cfb;
+  font-size: 12px;
+  margin: 10px 0;
+}
+
+.invalid__quill {
+  border: 1px solid red;
+}
+
+.padding-left {
+  margin-left: 16px;
+}
+
+.toolbar-background  {
+  color: black !important;
+  background-color: #4789bf;
+  //background: -moz-linear-gradient(45deg, rgba(0,204,0,1) 0%, rgba(255,255,0,1) 64%, rgba(255,255,0,1) 100%); /* ff3.6+ */
+  //background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(0,204,0,1)), color-stop(64%, rgba(255,255,0,1)), color-stop(100%, rgba(255,255,0,1))); /* safari4+,chrome */
+  //background: -webkit-linear-gradient(45deg, rgba(0,204,0,1) 0%, rgba(255,255,0,1) 64%, rgba(255,255,0,1) 100%); /* safari5.1+,chrome10+ */
+  //background: -o-linear-gradient(45deg, rgba(0,204,0,1) 0%, rgba(255,255,0,1) 64%, rgba(255,255,0,1) 100%); /* opera 11.10+ */
+  //background: -ms-linear-gradient(45deg, rgba(0,204,0,1) 0%, rgba(255,255,0,1) 64%, rgba(255,255,0,1) 100%); /* ie10+ */
+  //background: linear-gradient(45deg, rgba(0,204,0,1) 0%, rgba(255,255,0,1) 64%, rgba(255,255,0,1) 100%); /* w3c */
+  //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFF00', endColorstr='#00CC00',GradientType=1 ); /* ie6-9 */
+
+
+  //background: rgba(37,96,106,1);
+  //background: -webkit-gradient(left top, right top, color-stop(0%, rgba(37,96,106,1)), color-stop(31%, rgba(64,137,145,1)), color-stop(100%, rgba(91,179,185,1)));
+  //background: -webkit-linear-gradient(left, rgba(37,96,106,1) 0%, rgba(64,137,145,1) 31%, rgba(91,179,185,1) 100%);
+  //background: -o-linear-gradient(left, rgba(37,96,106,1) 0%, rgba(64,137,145,1) 31%, rgba(91,179,185,1) 100%);
+  //background: -webkit-gradient(linear, left top, right top, from(rgba(37,96,106,1)), color-stop(31%, rgba(64,137,145,1)), to(rgba(91,179,185,1)));
+  //background: linear-gradient(to right, rgba(37,96,106,1) 0%, rgba(64,137,145,1) 31%, rgba(91,179,185,1) 100%);
+  //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#25606a', endColorstr='#5bb3b9', GradientType=1 );
+
+  //background: url("../assets/imgs/logo.png") no-repeat center, linear-gradient(left, rgba(37,96,106,1) 0%, rgba(64,137,145,1) 31%, rgba(91,179,185,1) 100%);
+  //background: url("../assets/imgs/logo.png") no-repeat center, -webkit-linear-gradient(left, rgba(37,96,106,1) 0%, rgba(64,137,145,1) 31%, rgba(91,179,185,1) 100%);
+  //background: url("../assets/imgs/logo.png") no-repeat center, -moz-linear-gradient(left, rgba(37,96,106,1) 0%, rgba(64,137,145,1) 31%, rgba(91,179,185,1) 100%);
+}
+
+.toolbar-title-md {
+  color: #000000;
+}
+
+.platform-ios.ionlab-device-frame.frame-container.statusbar {
+  background: blue;
+}
+
+iframe {
+  width: 100%;
+}
+
+.color {
+  margin: 0;
+  color: #a3a3a3 !important;
+}
+
+.display__none {
+  display: none !important;
+}
+
+.spinner {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spin {
+  width: 15%;
+  height: 15%;
+}
+p {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+}
+
+ion-spinner {
+
+  * {
+    stroke: #576c33 !important;
+  }
+
+  &.spinner-circles circle,
+  &.spinner-bubbles circle,
+  &.spinner-dots circle {
+    fill: #576c33 !important;
+  }
+}
+
+ion-title {
+  color: black;
+}
+
+
+.resize {
+  opacity: 1;
+  z-index: 1000 !important;
+}
+
+//.text-input, .text-input-md, input{
+//  width: 100% !important;
+//}
+
+.ion-page > ion-header > .toolbar.statusbar-padding:first-child, .md ion-menu > .menu-inner > ion-header > .toolbar.statusbar-padding:first-child {
+  padding-top: 0 !important;
+  min-height: 56px !important;
+}
+
+#avatar{
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+}
+
+.custom-file-label {
+  position: relative;
+  top: 0;
+  left: 15px;
+  color: #007aff;
+  width: 100% !important;
+}
+
+.endArticles {
+  width: 97%;
+  background-color: white;
+  color: orange;
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  font-size: 13px;
+}
+
+.hidden__text {
+  white-space: nowrap; /* Запрещаем перенос строк */
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+  text-overflow: ellipsis; /* Добавляем многоточие */
+}
+
+.article-tile {
+  min-width: 101.39px;
+  max-width: 1280px;
+  min-height: 57.03px;
+  max-height: 720px;
+  background: url("../assets/imgs/tile-loader.gif");
+}
+
+.first-article-tile {
+  min-width: 338px;
+  max-width: 1280px;
+  min-height: 190.13px;
+  max-height: 720px;
+  background: url("../assets/imgs/tile-loader.gif");
+}
+
+.one-article-image {
+  min-width: 360px;
+  max-width: 1280px;
+  min-height: 202.5px;
+  max-height: 720px;
+  background: url("../assets/imgs/tile-loader.gif");
+}
+
+.one-article-edit-image {
+  min-width: 318px;
+  max-width: 1280px;
+  min-height: 178.88px;
+  max-height: 720px;
+  background: url("../assets/imgs/tile-loader.gif");
+}
+
+.removeHidden {
+  display: none !important;
+}
+
+$color-one: #2c3e50;
+$btn-colors: (
+        "green": "#2ecc71",
+        "blue": "#3498db",
+        "purple": "#9b59b6",
+        "navy": "#34495e",
+        "orange": "#e67e22",
+        "red": "#e74c3c"
+);
+
+// extenders
+.animate {
+  transition: all 0.3s;
+}
+
+
+.btn {
+  display: inline-block;
+  line-height: 35px;
+  width: auto;
+  margin: 8px;
+  padding: 0 15px;
+  font-size: 15px;
+  position: relative;
+  opacity: .999;
+  border-radius: 3px;
+  @extend .animate;
+}
+
+
+
+.btn-fill-horz {
+  background-color: #e5e5e5;
+  border: 1px solid #e5e5e5;
+  color: #a6a6a6;
+  overflow: hidden;
+
+  &:before,
+  &:after {
+    content: '';
+    width: 0;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    @extend .animate;
+  }
+
+  &:before {
+    left: 50%;
+  }
+
+  &:after {
+    right: 50%;
+  }
+
+  &:hover {
+    color: #fff;
+
+    &:before,
+    &:after {
+      width: 50%;
+      opacity: 1;
+    }
+  }
+
+  @each $name,$hex in $btn-colors {
+
+    &.btn-#{$name} {
+
+      &:before,
+      &:after {
+        background-color: #{$hex};
+      }
+
+      &:hover {
+        border-color: #{$hex};
+      }
+    }
+  }
+}
+

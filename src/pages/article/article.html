@@ -1,0 +1,152 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            <div *ngIf="closeView">
+                <ion-icon (click)="backForArticles()"
+                          ios="ios-arrow-back"
+                          md="md-arrow-back">
+                </ion-icon>
+            </div>
+            <div *ngIf="goToHomeWithCategory && !closeView">
+                <ion-icon (click)="backHomeWithCategorySorting()"
+                          ios="ios-arrow-back"
+                          md="md-arrow-back">
+                </ion-icon>
+            </div>
+            <div *ngIf="goToHome && !closeView">
+                <ion-icon (click)="backHome()"
+                          ios="ios-arrow-back"
+                          md="md-arrow-back">
+                </ion-icon>
+            </div>
+
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <div
+            *ngIf="preloader"
+            class="spinner"
+    >
+        <div class="spin">
+            <ion-spinner name="ios-small"></ion-spinner>
+        </div>
+    </div>
+    <div
+            *ngIf="article"
+            (swipeleft)="startAnimation('left')"
+            (swiperight)="startAnimation('right')"
+    >
+        <div [ngStyle]="{'background-color': bgCollor}" class="padding__style">
+            <p style="margin-bottom: 10px ; padding: 0 15px" class="color">{{article.timeOfPublication | timeAgo}} | {{article.timeOfPublication | date: 'd/MM/y'}}</p>
+            <div
+                    class="one-article-image"
+                    #imageforArticlePreloader
+            ></div>
+            <img
+                    class="hide"
+                    #imgforArticle
+                    (load)="imageLoaded(imgforArticle, imageforArticlePreloader)"
+                    *ngIf="article && article.imgUrl"
+                    [src]="article.imgUrl | safe"
+            />
+            <video *ngIf="article.videoMP4Url && article.videoOgvUrl && article.videoWebmUrl" width="100%" controls preload="metadata" webkit-playsinline="webkit-playsinline" class="videoPlayer">
+                <source [src]="article.videoMP4Url | safe" type="video/mp4"/>
+                <source [src]="article.videoOgvUrl | safe" type="video/ogg"/>
+                <source [src]="article.videoWebmUrl | safe" type="video/webm"/>
+            </video>
+            <h4 [ngStyle]="{'font-size': fontSizeTitle}"
+                style="padding: 5px 15px"
+            >
+                {{article.title}}
+            </h4>
+            <p
+                    [innerHTML]="article.body | setVideo"
+                    [ngStyle]="{'font-size': fontSizeBody}"
+                    style="padding: 0 15px"
+            ></p>
+            <p
+                    class="color"
+                    style="padding: 0 15px"
+            >
+                {{article.user.firstName}} {{article.user.lastName}}
+            </p>
+        </div>
+        <div id="like">
+            <div
+                    *ngIf="like"
+                    class="icon"
+                    (click)="likeArticle('like')"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <g fill="none" fill-rule="evenodd">
+                        <path d="M0 0h24v24H0z"/>
+                        <path fill="#D8D8D8" fill-rule="nonzero" d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div
+                    (click)="likeArticle('dislike')"
+                    *ngIf = "!like"
+                    class="icon"
+            >
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                ><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+            </div>
+            <p style="text-align: center">{{article.likes.length}}</p>
+        </div>
+
+        <div style="padding: 0 15px">
+            <div class="article__button">
+                <form
+                        (ngSubmit)="addComment()"
+                        [formGroup]="form"
+                >
+                    <ion-textarea
+                            class="article__input"
+                            type="text"
+                            placeholder="Оставьте комментарий"
+                            formControlName="comment"
+                    ></ion-textarea>
+                    <button
+                            class="article__button"
+                            ion-button
+                            clear
+                            type="submit"
+                            [disabled]="form.invalid"
+                    >
+                        Отправить
+                    </button>
+                </form>
+            </div>
+
+
+            <p class="color" style="margin-bottom:10px" >Всего комментариев: {{comments.length}}</p>
+            <div *ngFor="let comment of comments" >
+                <div class="home__item">
+                    <div class="home__item__img">
+                        <div style=" margin-right: 40px">
+                            <ion-icon
+                                    ios="ios-contact"
+                                    md="md-contact"
+                                    style="color: #8c8c8c; font-size: 50px;"
+                            ></ion-icon>
+                        </div>
+                        <div>
+                            <p class="color" style="font-size: 12px">{{comment.user.firstName}} {{comment.user.lastName}}</p>
+                            <p class="color" style="font-size: 12px">{{comment.timeOfPublication | date: 'd/MM/y'}} | {{comment.timeOfPublication | timeAgo}}</p>
+                        </div>
+                    </div>
+                    <div class="home__item__content">
+                        <p>{{comment.body}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

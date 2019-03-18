@@ -1,0 +1,6 @@
+<ion-tabs *ngIf="cookieValue">
+  <ion-tab [root]="tab1Root" tabTitle="Публикации" tabIcon="home"></ion-tab>
+  <ion-tab *ngIf="canShowAdd()" [root]="tab2Root" tabTitle="Добавление" tabIcon="add-circle"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Комментарии" tabIcon="chatbubbles"></ion-tab>
+  <ion-tab *ngIf="canShowTemplate()" [root]="tab4Root" tabTitle="Шаблон" tabIcon="construct"></ion-tab>
+</ion-tabs>

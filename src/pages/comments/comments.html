@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>comments</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="action-sheets-basic-page">
+  <div  *ngIf="!preloader" style="padding: 0 5px">
+    <ion-list *ngFor="let c of comments">
+      <div class="list__style" (click)="doWithComment(c)" style="padding: 5px !important;">
+        <div style="width: 70%; overflow: hidden">
+          <p class="inscription_of_comment">{{ c.user.firstName}}  {{ c.user.lastName }}</p>
+          <p >{{ c.body }}</p>
+          <p class="inscription_of_comment">{{ c.timeOfCreation | date: 'short' }}</p>
+        </div>
+        <div class="comment_action">
+          <div>
+              <span *ngIf="c.confirmation === true; else inProgress" class="lab success">
+                Опубликован
+              </span>
+            <ng-template  #inProgress>
+                    <span   class="comment_in_progress">
+                В обработке
+              </span>
+            </ng-template>
+          </div>
+          <!--<div>-->
+          <!--<ion-icon ios="ios-more" md="md-more"></ion-icon>-->
+          <!--</div>-->
+        </div>
+
+      </div>
+    </ion-list>
+    <div *ngIf="endComments" class="endArticles">
+      Комментариев больше нет
+    </div>
+  </div>
+  <ion-infinite-scroll  class="margin_bot" (ionInfinite)="doInfinite($event)" *ngIf="!endComments">
+    <ion-infinite-scroll-content style="height: 30px" loadingSpinner="bubbles" loadingText="Загрузка ..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

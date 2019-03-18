@@ -1,0 +1,15 @@
+<ion-header >
+    <ion-navbar>
+        <ion-title>
+            <div>
+                <ion-icon
+                        (click)="openHome()"
+                        ios="ios-arrow-back"
+                        md="md-arrow-back"
+                > Главная</ion-icon>
+            </div>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-nav [root]="rootPage"></ion-nav>

@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu" style="color: black"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+<ion-content overflow-scroll="true">
+    <div *ngIf="preloader" class="spinner">
+        <div class=“spin”>
+            <ion-spinner name="ios-small"></ion-spinner>
+        </div>
+    </div>
+    <div *ngIf="articles">
+        <ion-list *ngFor="let article of articles; let first = first;" no-lines>
+            <ion-card *ngIf="first ||  article.topNews; else smallTemplate" class="home__card" (click)="articleTapped(article, 'all')">
+                <p class="home__card__title color">{{article.category.name | uppercase }}</p>
+                <img src="assets/imgs/tile-loader.gif" class="main-img" #imagePreloaderFirstArticle/>
+                <img class="removeHidden" *ngIf="article && article.imgUrl && article.imgSmallUrl" #image (load)="imageLoadedFirstArticle(image, imagePreloaderFirstArticle)" [src]="article.imgUrl | safe"/>
+                <div  *ngIf="article.videoMP4Url && article.videoOgvUrl && article.videoWebmUrl">
+                    <video width="100%" height="100%" controls autoplay loop preload="metadata" playsinline class="videoPlayer">
+                        <source [src]="article.videoMP4Url | safe" type="video/mp4"/>
+                        <source [src]="article.videoOgvUrl | safe" type="video/ogg"/>
+                        <source [src]="article.videoWebmUrl | safe" type="video/webm"/>
+                    </video>
+                </div>
+                <ion-card-content>
+                    <ion-card-title class="home__title" [ngStyle]="{'font-size': fontSizeTitle}">
+                        {{article.title}}
+                    </ion-card-title>
+                    <p [ngStyle]="{'font-size': fontSizePreview}">{{ article.shortBody }}</p>
+                    <p class="color">{{article.timeOfPublication | timeAgo}}</p>
+                </ion-card-content>
+            </ion-card>
+            <ng-template  #smallTemplate >
+                <ion-card    class="shadow" (click)="articleTapped(article, 'category')">
+                    <p class="color">{{article.category.name}} | {{article.timeOfPublication | timeAgo}}</p>
+                    <div  class="home__item">
+                        <div class="home__item__img">
+                            <div class="article-tile" #imagePreloader></div>
+                            <img class="hide" *ngIf="article.imgUrl  && article.imgSmallUrl" #img (load)="imageLoaded(img, imagePreloader)" [src]="article.imgUrl | safe">
+                            <img *ngIf="article && article.screenshot" [src]="article.screenshot | safe">
+                        </div>
+                        <div class="home__item__content">
+                            <p class="home__item__content__title" [ngStyle]="{'font-size': fontSizeTitle}">
+                                {{article.title}}
+                            </p>
+                            <p class="color">{{article.user.firstName}} {{article.user.lastName}}</p>
+                        </div>
+                    </div>
+                    <p [ngStyle]="{'font-size': fontSizePreview}">{{ article.shortBody }}</p>
+                </ion-card>
+            </ng-template>
+        </ion-list>
+        <div *ngIf="endArticles || !articles.length" class="endArticles">
+            По данной категории статей больше нет ...
+        </div>
+        <ion-infinite-scroll class="margin_bot" (ionInfinite)="doInfinite($event)" *ngIf="!endArticles  ">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Загрузка ..."></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+        <!--<div *ngIf="!articles.length" class="without-category">-->
+            <!--<h4>По данной категории статьи отсутствуют</h4>-->
+        <!--</div>-->
+    </div>
+</ion-content>

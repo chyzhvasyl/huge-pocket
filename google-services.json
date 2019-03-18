@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1045103819568",
+    "firebase_url": "https://rgnews-503a0.firebaseio.com",
+    "project_id": "rgnews-503a0",
+    "storage_bucket": "rgnews-503a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045103819568:android:4b9fa306a3855597",
+        "android_client_info": {
+          "package_name": "welcash.rateil.group.news"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1045103819568-dsceld5jq6l4jv8gr5mve48m2vhhanc3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYSrDNK6qJX24mV0JQ44UYwfVmBaISUlo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
